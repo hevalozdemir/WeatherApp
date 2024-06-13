@@ -13,7 +13,11 @@ function App() {
         const response = await axios.get(`http://api.weatherapi.com/v1/forecast.json?key=${import.meta.env.VITE_WEATHER_API}&q=${location}&days=4&aqi=yes&alerts=yes`)
         setWeatherData(response.data)
         console.log(response)
-
+        //setWeatherData'nin icerisine ne yazarsan o degisikligi yapar.
+        //biz response sonucunu set etmesini istiyoruz. Yani Axios'dan gelen sonucun;
+        //Axios, HTTP isteği yaptığınızda, yanıtı bir nesne olarak döner ve bu nesne çeşitli bilgileri içerir. 
+        //setWeatherData(response) yazdiginda:Tüm yanit nesnesini icerir.
+        //Ama (response.data) API'den dönen veri gövdesini (yani asıl istediğiniz hava durumu bilgilerini) içerir.
       } catch (error) {
         console.log(error)
       }
@@ -24,11 +28,8 @@ function App() {
 
   }, [location])
 
-  //In diesem Code wird die Variable „location“ von useEffect verfolgt. 
-  //Ändert sich „location“, wird die fetchData-Funktion ausgeführt. 
-  //Diese Funktion stellt eine HTTP-Anfrage zum „async“ Abrufen von Daten 
-  //und legt die empfangenen Daten über die Funktion „setWeatherData“ fest. 
-  //Wenn ein Fehler auftritt, wird der Fehler in die Konsole geschrieben.
+  //useEffect(()=>{...},[location])
+  //React bileseni render edildidinde ve location degeri degistiginde calisir!
 
   const handleLocationChange = (event) => {setLocation(event.target.value)}
 
